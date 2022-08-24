@@ -15,6 +15,15 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@camping-assistant/camping-assistant/data-access/trips": [
+				"libs/camping-assistant/data-access/trips/src/index.ts"
+			],
+			"@camping-assistant/camping-assistant/feature/trips": [
+				"libs/camping-assistant/feature/trips/src/index.ts"
+			],
+			"@camping-assistant/camping-assistant/ui/trips": [
+				"libs/camping-assistant/ui/trips/src/index.ts"
+			],
 			"@camping-assistant/shared/ui/components": [
 				"libs/shared/ui/components/src/index.ts"
 			]

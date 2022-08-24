@@ -1,0 +1,25 @@
+{
+	"projectType": "library",
+	"sourceRoot": "libs/camping-assistant/data-access/trips/src",
+	"prefix": "camping-assistant",
+	"targets": {
+		"test": {
+			"executor": "@nrwl/jest:jest",
+			"outputs": ["coverage/libs/camping-assistant/data-access/trips"],
+			"options": {
+				"jestConfig": "libs/camping-assistant/data-access/trips/jest.config.ts",
+				"passWithNoTests": true
+			}
+		},
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"options": {
+				"lintFilePatterns": [
+					"libs/camping-assistant/data-access/trips/**/*.ts",
+					"libs/camping-assistant/data-access/trips/**/*.html"
+				]
+			}
+		}
+	},
+	"tags": ["scope:camping-assistant", "type:data-access"]
+}
