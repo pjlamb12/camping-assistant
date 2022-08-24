@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class TripListComponent implements OnInit {
 	public trips$: Observable<Trip[]> = this._trips.getPreTripList();
+	public postTrips$: Observable<Trip[]> = this._trips.getPostTripList();
 
 	constructor(private _trips: TripsService) {}
 
