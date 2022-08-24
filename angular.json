@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "camping-assistant": "apps/camping-assistant",
+    "camping-assistant-e2e": "apps/camping-assistant-e2e"
+  }
+}
