@@ -1,7 +1,11 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div>
 	<div class="flow-root mt-6">
-		<ul role="list" class="-my-5 divide-y divide-gray-200">
+		<ul
+			role="list"
+			class="-my-5 divide-y divide-gray-200"
+			*ngIf="trips.length; else noTrips"
+		>
 			<li class="py-4" *ngFor="let trip of trips">
 				<div class="flex items-center space-x-4">
 					<div class="flex-1 min-w-0">
@@ -25,11 +29,26 @@
 		</ul>
 	</div>
 	<div class="mt-6">
-		<a
-			href="#"
-			class="w-full max-w-sm mx-auto flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+		<div
+			class="w-full max-w-sm mx-auto flex justify-between items-center gap -4"
 		>
-			View all
-		</a>
+			<a
+				*ngIf="trips.length"
+				href="#"
+				class="px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition"
+			>
+				View all
+			</a>
+			<a
+				href="#"
+				class="px-4 py-2 border border-indigo-800 shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-800 transition"
+			>
+				Add New Trip
+			</a>
+		</div>
 	</div>
 </div>
+
+<ng-template #noTrips>
+	<h3 class="text-lg font-medium">There are no trips to list.</h3>
+</ng-template>
