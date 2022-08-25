@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { TripType } from './trip-type.enum';
 import { Trip } from './trip.interface';
 
@@ -28,7 +28,7 @@ const mockPostTrips: Trip[] = [
 export class TripsService {
 	constructor(private _db: NgxIndexedDBService) {}
 
-	getPreTripList() {
+	getPreTripList(): Observable<Trip[]> {
 		return this._db.getAllByIndex<Trip>(
 			'trips',
 			'tripType',
@@ -36,7 +36,7 @@ export class TripsService {
 		);
 	}
 
-	getPostTripList() {
+	getPostTripList(): Observable<Trip[]> {
 		return this._db.getAllByIndex<Trip>(
 			'trips',
 			'tripType',
@@ -48,7 +48,7 @@ export class TripsService {
 		return this._db.add('trips', trip);
 	}
 
-	getTripById(id: number) {
-		return this._db.getByIndex('trips', 'id', id);
+	getTripById(id: number): Observable<Trip> {
+		return this._db.getByIndex<Trip>('trips', 'id', id);
 	}
 }
