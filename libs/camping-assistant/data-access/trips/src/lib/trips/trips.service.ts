@@ -32,19 +32,11 @@ export class TripsService {
 
 	addTrip(trip: Trip) {
 		console.log('adding trip');
-		return this._db.add('trips', trip).pipe(
-			tap((data) => {
-				console.log(data);
-			})
-		);
+		return this._db.add('trips', trip);
 	}
 
 	updateTrip(trip: Trip) {
-		return this._db.update('trips', trip).pipe(
-			tap((data) => {
-				console.log(data);
-			})
-		);
+		return this._db.update('trips', trip);
 	}
 
 	getTripById(id: number): Observable<Trip> {

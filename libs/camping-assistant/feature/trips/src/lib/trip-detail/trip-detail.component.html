@@ -1,0 +1,39 @@
+<div class="w-full max-w-3xl mx-auto" *ngIf="trip$ | async as trip">
+	<div class="flow-root">
+		<h1 class="text-xl md:text-2xl lg:text-3xl">{{ trip.name }}</h1>
+		<form [formGroup]="form">
+			<ul role="list" class="mt-6 divide-y divide-gray-200">
+				<li
+					class="py-4"
+					*ngFor="let step of steps.controls; let i = index"
+				>
+					<div
+						formArrayName="steps"
+						class="flex items-center space-x-4"
+					>
+						<form [formGroupName]="i" class="flex-shrink-0">
+							<input
+								formControlName="completed"
+								type="checkbox"
+								class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+							/>
+						</form>
+						<div class="flex-1 min-w-0">
+							<p
+								[ngClass]="{
+									'text-gray-400 line-through':
+										step.get('completed')?.value === true,
+									'text-gray-900 font-medium':
+										step.get('completed')?.value === false
+								}"
+								class="text-md"
+							>
+								{{ step.get('step')?.value }}
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
