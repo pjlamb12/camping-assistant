@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
 	Trip,
 	TripsService,
@@ -23,7 +23,7 @@ export class TripDetailComponent implements OnInit {
 						steps: [],
 						tripType: null,
 				  } as any as Trip)
-				: this._trips.getTripById(params['id']);
+				: this._trips.getTripById(+params['id']);
 		}),
 		tap((trip: Trip) => {
 			const subForms: FormGroup[] = trip.steps.map((step: TripStep) =>
@@ -60,7 +60,8 @@ export class TripDetailComponent implements OnInit {
 	constructor(
 		private _route: ActivatedRoute,
 		private _trips: TripsService,
-		private _fb: FormBuilder
+		private _fb: FormBuilder,
+		private _router: Router
 	) {}
 
 	ngOnInit(): void {}
@@ -86,9 +87,13 @@ export class TripDetailComponent implements OnInit {
 		const { id, ...rest } = this.form.value;
 
 		if (id) {
-			this._trips.updateTrip({ id, ...rest }).subscribe();
+			this._trips.updateTrip({ id, ...rest }).subscribe(() => {
+				this._router.navigateByUrl('/trips');
+			});
 		} else {
-			this._trips.addTrip({ ...rest }).subscribe();
+			this._trips.addTrip({ ...rest }).subscribe(() => {
+				this._router.navigateByUrl('/trips');
+			});
 		}
 	}
 }

@@ -3,7 +3,8 @@ import {
 	TripsService,
 	Trip,
 } from '@camping-assistant/camping-assistant/data-access/trips';
-import { Observable } from 'rxjs';
+import { TripType } from 'libs/camping-assistant/data-access/trips/src/lib/trips/trip-type.enum';
+import { map, Observable } from 'rxjs';
 
 @Component({
 	selector: 'camping-assistant-trip-list',
@@ -11,14 +12,24 @@ import { Observable } from 'rxjs';
 	styleUrls: ['./trip-list.component.scss'],
 })
 export class TripListComponent implements OnInit {
-	public trips$: Observable<Trip[]> = this._trips.getPreTripList();
-	public postTrips$: Observable<Trip[]> = this._trips.getPostTripList();
+	public trips$: Observable<{ preTrips: Trip[]; postTrips: Trip[] }> =
+		this._trips.getAllTrips().pipe(
+			map((trips: Trip[]) => {
+				const preTrips = trips.filter(
+					(trip: Trip) => trip.tripType === TripType.PreTrip
+				);
+				const postTrips = trips.filter(
+					(trip: Trip) => trip.tripType === TripType.PostTrip
+				);
+
+				return {
+					preTrips,
+					postTrips,
+				};
+			})
+		);
 
 	constructor(private _trips: TripsService) {}
 
-	ngOnInit(): void {
-		this._trips.getAllTrips().subscribe((trips) => {
-			console.log(trips);
-		});
-	}
+	ngOnInit(): void {}
 }

@@ -48,6 +48,6 @@ export class TripsService {
 	}
 
 	getTripById(id: number): Observable<Trip> {
-		return this._db.getByIndex<Trip>('trips', 'id', id);
+		return this._db.getByKey<Trip>('trips', id);
 	}
 }

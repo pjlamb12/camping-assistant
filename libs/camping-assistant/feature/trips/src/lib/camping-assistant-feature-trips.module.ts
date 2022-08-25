@@ -11,7 +11,8 @@ import { TripListComponent } from './trip-list/trip-list.component';
 		CommonModule,
 		CampingAssistantUiTripsModule,
 		RouterModule.forChild([
-			{ path: ':id', component: TripDetailComponent },
+			{ path: 'add/:id', component: TripDetailComponent },
+			{ path: 'edit/:id', component: TripDetailComponent },
 			{ path: '', component: TripListComponent },
 		]),
 		ReactiveFormsModule,
