@@ -9,11 +9,11 @@ import {
 import { map, Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
-	selector: 'camping-assistant-trip-detail',
-	templateUrl: './trip-detail.component.html',
-	styleUrls: ['./trip-detail.component.scss'],
+	selector: 'camping-assistant-trip-form',
+	templateUrl: './trip-form.component.html',
+	styleUrls: ['./trip-form.component.scss'],
 })
-export class TripDetailComponent implements OnInit {
+export class TripFormComponent implements OnInit {
 	public tripData$: Observable<Trip> = this._route.params.pipe(
 		switchMap((params: Params) => {
 			return params['id'] === 'new'

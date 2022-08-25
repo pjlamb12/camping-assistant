@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CampingAssistantUiTripsModule } from '@camping-assistant/camping-assistant/ui/trips';
-import { TripDetailComponent } from './trip-detail/trip-detail.component';
+import { TripFormComponent } from './trip-form/trip-form.component';
 import { TripListComponent } from './trip-list/trip-list.component';
 
 @NgModule({
@@ -11,12 +11,12 @@ import { TripListComponent } from './trip-list/trip-list.component';
 		CommonModule,
 		CampingAssistantUiTripsModule,
 		RouterModule.forChild([
-			{ path: 'add/:id', component: TripDetailComponent },
-			{ path: 'edit/:id', component: TripDetailComponent },
+			{ path: 'add/:id', component: TripFormComponent },
+			{ path: 'edit/:id', component: TripFormComponent },
 			{ path: '', component: TripListComponent },
 		]),
 		ReactiveFormsModule,
 	],
-	declarations: [TripListComponent, TripDetailComponent],
+	declarations: [TripListComponent, TripFormComponent],
 })
 export class CampingAssistantFeatureTripsModule {}
