@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {
-	FormArray,
-	FormBuilder,
-	FormControl,
-	FormGroup,
-	Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import {
 	Trip,
 	TripsService,
+	TripStep,
 } from '@camping-assistant/camping-assistant/data-access/trips';
 import { map, Observable, of, switchMap, tap } from 'rxjs';
 
@@ -21,41 +16,41 @@ import { map, Observable, of, switchMap, tap } from 'rxjs';
 export class TripDetailComponent implements OnInit {
 	public tripData$: Observable<Trip> = this._route.params.pipe(
 		switchMap((params: Params) => {
-			const defaultSteps: string[] = ['starting point'];
 			return params['id'] === 'new'
 				? of({
 						id: null,
 						name: '',
-						steps: defaultSteps,
+						steps: [],
 						tripType: null,
 				  } as any as Trip)
 				: this._trips.getTripById(params['id']);
 		}),
 		tap((trip: Trip) => {
-			const { steps, ...rest } = trip;
-			const controls: FormGroup[] = trip.steps.map((step: string) =>
-				this._fb.group({ step })
+			const subForms: FormGroup[] = trip.steps.map((step: TripStep) =>
+				this._fb.group({
+					step: [step.step, [Validators.required]],
+					completed: step.completed,
+				})
 			);
 
-			controls.forEach((control: FormGroup) => {
-				this.addStep(control);
+			subForms.forEach((form: FormGroup) => {
+				this.addStep(form);
 			});
 
-			// if (trip.id) {
-			this.form.patchValue({
-				id: trip.id,
-				name: trip.name,
-				tripType: trip.tripType,
-				// steps: this._fb.array(controls),
-			});
-			// }
+			if (trip.id) {
+				this.form.patchValue({
+					id: trip.id,
+					name: trip.name,
+					tripType: trip.tripType,
+				});
+			}
 		})
 	);
 	public form: FormGroup = this._fb.group({
 		id: null,
 		name: ['', [Validators.required]],
 		tripType: [null, [Validators.required]],
-		steps: this._fb.array([]),
+		steps: this._fb.array([], Validators.required),
 	});
 
 	get steps() {
@@ -74,11 +69,26 @@ export class TripDetailComponent implements OnInit {
 		if (ctrl) {
 			this.steps.push(ctrl);
 		} else {
-			this.steps.push(this._fb.group({ step: '' }));
+			this.steps.push(
+				this._fb.group({
+					step: ['', [Validators.required]],
+					completed: false,
+				})
+			);
 		}
 	}
 
 	removeStep(index: number) {
 		this.steps.removeAt(index);
+	}
+
+	submitForm() {
+		const { id, ...rest } = this.form.value;
+
+		if (id) {
+			this._trips.updateTrip({ id, ...rest }).subscribe();
+		} else {
+			this._trips.addTrip({ ...rest }).subscribe();
+		}
 	}
 }
