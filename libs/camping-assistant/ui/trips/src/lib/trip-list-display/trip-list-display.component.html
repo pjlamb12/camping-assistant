@@ -4,16 +4,31 @@
 		<ul
 			role="list"
 			class="-my-5 divide-y divide-gray-200"
-			*ngIf="trips.length; else noTrips"
+			*ngIf="extendedTrips && extendedTrips.length; else noTrips"
 		>
-			<li class="py-4" *ngFor="let trip of trips">
+			<li class="py-4" *ngFor="let trip of extendedTrips">
 				<div class="flex items-center space-x-4">
 					<div class="flex-1 min-w-0">
-						<p class="text-sm font-medium text-gray-900 truncate">
+						<p class="text-base font-medium text-gray-900 truncate">
 							{{ trip.name }}
 						</p>
-						<p class="text-sm text-gray-500 truncate">
-							<!-- is complete? -->
+						<p
+							class="text-sm text-gray-500 truncate flex justify-start gap-4"
+						>
+							<span
+								>{{
+									trip.steps.length > 1
+										? trip.steps.length + ' Steps'
+										: trip.steps.length + ' Step'
+								}}
+							</span>
+							<span
+								>{{
+									trip.isComplete
+										? 'Completed'
+										: 'Not Completed'
+								}}
+							</span>
 						</p>
 					</div>
 					<div class="flex gap-2 items-center">
