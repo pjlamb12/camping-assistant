@@ -1,12 +1,12 @@
 {
-	"$schema": "./node_modules/nx/schemas/workspace-schema.json",
-	"version": 2,
-	"projects": {
-		"camping-assistant": "apps/camping-assistant",
-		"camping-assistant-data-access-trips": "libs/camping-assistant/data-access/trips",
-		"camping-assistant-e2e": "apps/camping-assistant-e2e",
-		"camping-assistant-feature-trips": "libs/camping-assistant/feature/trips",
-		"camping-assistant-ui-trips": "libs/camping-assistant/ui/trips",
-		"shared-ui-components": "libs/shared/ui/components"
-	}
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "camping-assistant": "apps/camping-assistant",
+    "camping-assistant-data-access-trips": "libs/camping-assistant/data-access/trips",
+    "camping-assistant-e2e": "apps/camping-assistant-e2e",
+    "camping-assistant-feature-trips": "libs/camping-assistant/feature/trips",
+    "camping-assistant-ui-trips": "libs/camping-assistant/ui/trips",
+    "shared-ui-components": "libs/shared/ui/components"
+  }
 }

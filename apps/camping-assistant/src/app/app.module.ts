@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const dbConfig: DBConfig = {
 	name: 'camping-assistant',
@@ -35,6 +37,12 @@ const routes: Routes[] = [];
 		SharedUiComponentsModule,
 		AppRoutingModule,
 		NgxIndexedDBModule.forRoot(dbConfig),
+  ServiceWorkerModule.register('ngsw-worker.js', {
+    enabled: environment.production,
+    // Register the ServiceWorker as soon as the application is stable
+    // or after 30 seconds (whichever comes first).
+    registrationStrategy: 'registerWhenStable:30000'
+  }),
 	],
 	providers: [],
 	bootstrap: [AppComponent],

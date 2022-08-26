@@ -1,0 +1,9 @@
+build]
+  command = "npm run build:prod"
+  publish = "dist/apps/camping-assistant/"
+  NODE_ENV = "production"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
