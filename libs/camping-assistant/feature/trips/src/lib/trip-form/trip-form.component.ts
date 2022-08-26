@@ -6,7 +6,7 @@ import {
 	TripsService,
 	TripStep,
 } from '@camping-assistant/camping-assistant/data-access/trips';
-import { map, Observable, of, switchMap, tap } from 'rxjs';
+import { combineLatest, map, Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
 	selector: 'camping-assistant-trip-form',
@@ -14,16 +14,39 @@ import { map, Observable, of, switchMap, tap } from 'rxjs';
 	styleUrls: ['./trip-form.component.scss'],
 })
 export class TripFormComponent implements OnInit {
-	public tripData$: Observable<Trip> = this._route.params.pipe(
-		switchMap((params: Params) => {
-			return params['id'] === 'new'
+	public tripData$: Observable<Trip> = combineLatest([
+		this._route.params,
+		this._route.queryParams,
+	]).pipe(
+		tap((data: any) => console.log(data)),
+		switchMap(([params, queryParams]: Params[]) => {
+			const id = params['id'];
+			const duplicate = queryParams['duplicate'];
+			const idToUse = duplicate || id;
+
+			return id === 'new' && !duplicate
 				? of({
 						id: null,
 						name: '',
 						steps: [],
 						tripType: null,
 				  } as any as Trip)
-				: this._trips.getTripById(+params['id']);
+				: this._trips.getTripById(+idToUse).pipe(
+						map((trip: Trip) => {
+							if (queryParams['duplicate']) {
+								const { id, ...rest } = trip;
+								console.log(rest);
+								return {
+									id: null,
+									...rest,
+								};
+							}
+
+							return {
+								...trip,
+							};
+						})
+				  );
 		}),
 		tap((trip: Trip) => {
 			const subForms: FormGroup[] = trip.steps.map((step: TripStep) =>
@@ -37,13 +60,11 @@ export class TripFormComponent implements OnInit {
 				this.addStep(form);
 			});
 
-			if (trip.id) {
-				this.form.patchValue({
-					id: trip.id,
-					name: trip.name,
-					tripType: trip.tripType,
-				});
-			}
+			this.form.patchValue({
+				id: trip.id,
+				name: trip.name,
+				tripType: trip.tripType,
+			});
 		})
 	);
 	public form: FormGroup = this._fb.group({

@@ -13,6 +13,7 @@ import { TripDetailComponent } from './trip-detail/trip-detail.component';
 		CampingAssistantUiTripsModule,
 		RouterModule.forChild([
 			{ path: 'add/:id', component: TripFormComponent },
+			{ path: 'copy/:id', component: TripFormComponent },
 			{ path: 'edit/:id', component: TripFormComponent },
 			{ path: 'view/:id', component: TripDetailComponent },
 			{ path: '', component: TripListComponent },
