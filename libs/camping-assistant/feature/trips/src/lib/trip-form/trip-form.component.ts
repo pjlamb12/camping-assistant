@@ -6,7 +6,16 @@ import {
 	TripsService,
 	TripStep,
 } from '@camping-assistant/camping-assistant/data-access/trips';
-import { combineLatest, map, Observable, of, switchMap, tap } from 'rxjs';
+import {
+	catchError,
+	combineLatest,
+	EMPTY,
+	map,
+	Observable,
+	of,
+	switchMap,
+	tap,
+} from 'rxjs';
 
 @Component({
 	selector: 'camping-assistant-trip-form',
@@ -18,7 +27,6 @@ export class TripFormComponent implements OnInit {
 		this._route.params,
 		this._route.queryParams,
 	]).pipe(
-		tap((data: any) => console.log(data)),
 		switchMap(([params, queryParams]: Params[]) => {
 			const id = params['id'];
 			const duplicate = queryParams['duplicate'];
@@ -45,6 +53,10 @@ export class TripFormComponent implements OnInit {
 							return {
 								...trip,
 							};
+						}),
+						catchError(() => {
+							this._router.navigate(['/trips']);
+							return EMPTY;
 						})
 				  );
 		}),

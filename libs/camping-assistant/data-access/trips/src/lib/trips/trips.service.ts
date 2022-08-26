@@ -40,7 +40,13 @@ export class TripsService {
 	}
 
 	getTripById(id: number): Observable<Trip> {
-		return this._db.getByKey<Trip>('trips', id);
+		return this._db.getByKey<Trip>('trips', id).pipe(
+			tap((trip: Trip) => {
+				if (!trip) {
+					throw new Error('Trip not found');
+				}
+			})
+		);
 	}
 
 	deleteTrip(id: number) {
