@@ -12,11 +12,27 @@ import { TripDetailComponent } from './trip-detail/trip-detail.component';
 		CommonModule,
 		CampingAssistantUiTripsModule,
 		RouterModule.forChild([
-			{ path: 'add/:id', component: TripFormComponent },
-			{ path: 'copy/:id', component: TripFormComponent },
-			{ path: 'edit/:id', component: TripFormComponent },
-			{ path: 'view/:id', component: TripDetailComponent },
-			{ path: '', component: TripListComponent },
+			{
+				path: 'add/:id',
+				component: TripFormComponent,
+				title: 'Add Trip',
+			},
+			{
+				path: 'copy/:id',
+				component: TripFormComponent,
+				title: 'Duplicate Trip',
+			},
+			{
+				path: 'edit/:id',
+				component: TripFormComponent,
+				title: 'Edit Trip',
+			},
+			{
+				path: 'view/:id',
+				component: TripDetailComponent,
+				title: 'View Trip',
+			},
+			{ path: '', component: TripListComponent, title: 'View Trips' },
 		]),
 		ReactiveFormsModule,
 	],
