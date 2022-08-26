@@ -1,102 +1,101 @@
 {
-  "projectType": "application",
-  "sourceRoot": "apps/camping-assistant/src",
-  "prefix": "ca",
-  "targets": {
-    "build": {
-      "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "outputPath": "dist/apps/camping-assistant",
-        "index": "apps/camping-assistant/src/index.html",
-        "main": "apps/camping-assistant/src/main.ts",
-        "polyfills": "apps/camping-assistant/src/polyfills.ts",
-        "tsConfig": "apps/camping-assistant/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/camping-assistant/src/favicon.ico",
-          "apps/camping-assistant/src/assets",
-          "apps/camping-assistant/src/manifest.webmanifest"
-        ],
-        "styles": [
-          "apps/camping-assistant/src/styles.scss"
-        ],
-        "scripts": [],
-        "serviceWorker": true,
-        "ngswConfigPath": "apps/camping-assistant/ngsw-config.json"
-      },
-      "configurations": {
-        "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
-            }
-          ],
-          "fileReplacements": [
-            {
-              "replace": "apps/camping-assistant/src/environments/environment.ts",
-              "with": "apps/camping-assistant/src/environments/environment.prod.ts"
-            }
-          ],
-          "outputHashing": "all"
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "configurations": {
-        "production": {
-          "browserTarget": "camping-assistant:build:production"
-        },
-        "development": {
-          "browserTarget": "camping-assistant:build:development"
-        }
-      },
-      "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "browserTarget": "camping-assistant:build"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/camping-assistant/**/*.ts",
-          "apps/camping-assistant/**/*.html"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/camping-assistant"
-      ],
-      "options": {
-        "jestConfig": "apps/camping-assistant/jest.config.ts",
-        "passWithNoTests": true
-      }
-    }
-  },
-  "tags": []
+	"projectType": "application",
+	"sourceRoot": "apps/camping-assistant/src",
+	"prefix": "ca",
+	"targets": {
+		"build": {
+			"executor": "@angular-devkit/build-angular:browser",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/apps/camping-assistant",
+				"index": "apps/camping-assistant/src/index.html",
+				"main": "apps/camping-assistant/src/main.ts",
+				"polyfills": "apps/camping-assistant/src/polyfills.ts",
+				"tsConfig": "apps/camping-assistant/tsconfig.app.json",
+				"inlineStyleLanguage": "scss",
+				"assets": [
+					"apps/camping-assistant/src/favicon.ico",
+					"apps/camping-assistant/src/assets",
+					"apps/camping-assistant/src/manifest.webmanifest"
+				],
+				"styles": [
+					"node_modules/primeicons/primeicons.css",
+					"node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css",
+					"node_modules/primeng/resources/primeng.min.css",
+					"apps/camping-assistant/src/styles.scss"
+				],
+				"scripts": [],
+				"serviceWorker": true,
+				"ngswConfigPath": "apps/camping-assistant/ngsw-config.json"
+			},
+			"configurations": {
+				"production": {
+					"budgets": [
+						{
+							"type": "initial",
+							"maximumWarning": "500kb",
+							"maximumError": "1mb"
+						},
+						{
+							"type": "anyComponentStyle",
+							"maximumWarning": "2kb",
+							"maximumError": "4kb"
+						}
+					],
+					"fileReplacements": [
+						{
+							"replace": "apps/camping-assistant/src/environments/environment.ts",
+							"with": "apps/camping-assistant/src/environments/environment.prod.ts"
+						}
+					],
+					"outputHashing": "all"
+				},
+				"development": {
+					"buildOptimizer": false,
+					"optimization": false,
+					"vendorChunk": true,
+					"extractLicenses": false,
+					"sourceMap": true,
+					"namedChunks": true
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"serve": {
+			"executor": "@angular-devkit/build-angular:dev-server",
+			"configurations": {
+				"production": {
+					"browserTarget": "camping-assistant:build:production"
+				},
+				"development": {
+					"browserTarget": "camping-assistant:build:development"
+				}
+			},
+			"defaultConfiguration": "development"
+		},
+		"extract-i18n": {
+			"executor": "@angular-devkit/build-angular:extract-i18n",
+			"options": {
+				"browserTarget": "camping-assistant:build"
+			}
+		},
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"options": {
+				"lintFilePatterns": [
+					"apps/camping-assistant/**/*.ts",
+					"apps/camping-assistant/**/*.html"
+				]
+			}
+		},
+		"test": {
+			"executor": "@nrwl/jest:jest",
+			"outputs": ["coverage/apps/camping-assistant"],
+			"options": {
+				"jestConfig": "apps/camping-assistant/jest.config.ts",
+				"passWithNoTests": true
+			}
+		}
+	},
+	"tags": []
 }

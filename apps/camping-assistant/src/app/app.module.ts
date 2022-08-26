@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes } from '@angular/router';
 import { SharedUiComponentsModule } from '@camping-assistant/shared/ui/components';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,15 +35,16 @@ const routes: Routes[] = [];
 	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		SharedUiComponentsModule,
 		AppRoutingModule,
 		NgxIndexedDBModule.forRoot(dbConfig),
-  ServiceWorkerModule.register('ngsw-worker.js', {
-    enabled: environment.production,
-    // Register the ServiceWorker as soon as the application is stable
-    // or after 30 seconds (whichever comes first).
-    registrationStrategy: 'registerWhenStable:30000'
-  }),
+		ServiceWorkerModule.register('ngsw-worker.js', {
+			enabled: environment.production,
+			// Register the ServiceWorker as soon as the application is stable
+			// or after 30 seconds (whichever comes first).
+			registrationStrategy: 'registerWhenStable:30000',
+		}),
 	],
 	providers: [],
 	bootstrap: [AppComponent],

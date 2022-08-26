@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CampingAssistantUiTripsModule } from '@camping-assistant/camping-assistant/ui/trips';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TripFormComponent } from './trip-form/trip-form.component';
 import { TripListComponent } from './trip-list/trip-list.component';
 import { TripDetailComponent } from './trip-detail/trip-detail.component';
@@ -35,6 +36,7 @@ import { TripDetailComponent } from './trip-detail/trip-detail.component';
 			{ path: '', component: TripListComponent, title: 'View Trips' },
 		]),
 		ReactiveFormsModule,
+		ConfirmDialogModule,
 	],
 	declarations: [TripListComponent, TripFormComponent, TripDetailComponent],
 })

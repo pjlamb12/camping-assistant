@@ -14,7 +14,7 @@
 		<h2 class="text-2xl font-medium">Post Trip Lists</h2>
 		<ca-trip-list-display
 			[trips]="trips.postTrips"
-			(deleteTrip)="handleDeleteTrip($event)"
+			(deleteTrip)="attemptToDeleteTrip($event)"
 		></ca-trip-list-display>
 	</section>
 </div>
@@ -28,3 +28,22 @@
 		</a>
 	</div>
 </div>
+
+<p-confirmDialog #cd header="Are you sure?" icon="pi pi-exclamation-triangle">
+	<ng-template pTemplate="footer">
+		<button
+			type="button"
+			class="px-4 py-2 border border-gray-400 shadow-sm text-sm font-medium rounded-md text-gray-800 bg-white hover:bg-gray-50 transition"
+			(click)="cd.reject()"
+		>
+			No
+		</button>
+		<button
+			type="button"
+			class="px-4 py-2 border border-indigo-800 shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-800 transition"
+			(click)="cd.accept()"
+		>
+			Yes
+		</button>
+	</ng-template>
+</p-confirmDialog>
