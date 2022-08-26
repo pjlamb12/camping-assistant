@@ -12,10 +12,10 @@ export class AppComponent implements OnInit {
 	constructor(private _swUpdate: SwUpdate) {}
 
 	ngOnInit() {
-		this._swUpdate.versionUpdates
-			.pipe(untilDestroyed(this))
-			.subscribe(() => {
+		this._swUpdate.checkForUpdate().then((update: boolean) => {
+			if (update) {
 				window.location.reload();
-			});
+			}
+		});
 	}
 }
