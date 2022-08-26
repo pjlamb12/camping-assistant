@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 const dbConfig: DBConfig = {
 	name: 'camping-assistant',
@@ -45,6 +46,7 @@ const routes: Routes[] = [];
 			// or after 30 seconds (whichever comes first).
 			registrationStrategy: 'registerWhenStable:30000',
 		}),
+		ConfirmDialogModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
