@@ -1,9 +1,11 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	EventEmitter,
 	Input,
 	OnChanges,
 	OnInit,
+	Output,
 	SimpleChanges,
 } from '@angular/core';
 import {
@@ -23,6 +25,7 @@ interface ExtendedTrip extends Trip {
 })
 export class TripListDisplayComponent implements OnChanges {
 	@Input() trips!: Trip[];
+	@Output() deleteTrip: EventEmitter<number> = new EventEmitter<number>();
 	public extendedTrips: ExtendedTrip[] = [];
 	constructor() {}
 
@@ -36,6 +39,12 @@ export class TripListDisplayComponent implements OnChanges {
 					),
 				};
 			});
+		}
+	}
+
+	clickDeleteTrip(id: number | null) {
+		if (id) {
+			this.deleteTrip.emit(id);
 		}
 	}
 }
