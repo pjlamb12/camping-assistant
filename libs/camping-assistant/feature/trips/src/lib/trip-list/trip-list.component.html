@@ -6,7 +6,7 @@
 		<h2 class="text-2xl font-medium">Pre Trip Lists</h2>
 		<ca-trip-list-display
 			[trips]="trips.preTrips"
-			(deleteTrip)="handleDeleteTrip($event)"
+			(deleteTrip)="attemptToDeleteTrip($event)"
 		></ca-trip-list-display>
 	</section>
 
