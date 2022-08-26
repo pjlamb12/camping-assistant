@@ -1,7 +1,7 @@
 {
 	"name": "camping-assistant",
 	"short_name": "camping-assistant",
-	"theme_color": "#1976d2",
+	"theme_color": "#6366f1",
 	"background_color": "#fafafa",
 	"display": "standalone",
 	"scope": "./",

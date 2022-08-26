@@ -3,17 +3,20 @@
 		<div class="flex items-center justify-between h-16">
 			<div class="flex items-center">
 				<div class="flex-shrink-0">
-					<svg
-						class="h-10 w-12 text-indigo-500"
-						viewBox="0 0 468 330"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M339.155 0.244995L321.155 0.437996L321.575 39.418C275.802 52.703 213.042 59.156 155.101 62.991C190.198 159.275 254.458 236.761 312.946 320.121C333.664 300.466 364.056 288.138 396.406 284.111C375.606 266.002 359.772 256.145 337.573 213.673C368.843 250.758 390.152 262.14 415.196 275.679C418.459 262.585 424.134 251.041 433.917 243.005C442.584 235.885 453.943 232.351 467.447 232.661C420.573 172.898 365.777 115.607 339.617 43.226L339.155 0.245995V0.244995ZM141.25 11.92L123.252 12.164C123.252 12.164 123.502 30.504 123.812 49.134C123.968 58.45 124.137 67.837 124.301 75.063C124.361 77.699 124.418 79.643 124.475 81.605C90.097 165.338 55.321 242.598 0.554993 315.047C34.19 313.66 66.881 313.844 99.107 315.006C121.37 252.389 122.453 180.151 134.734 113C146.151 181.562 145.3 252.445 168.217 318.83C211.179 321.912 253.907 326.028 297.567 329.756C241.897 250.605 179.354 174.719 142.449 80.391C142.399 78.609 142.349 76.995 142.297 74.654C142.135 67.498 141.964 58.131 141.809 48.834C141.499 30.24 141.25 11.92 141.25 11.92V11.92Z"
-							fill="currentColor"
-						/>
-					</svg>
+					<div class="flex gap-2 items-center">
+						<svg
+							class="h-10 w-12 text-indigo-500"
+							viewBox="0 0 468 330"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M339.155 0.244995L321.155 0.437996L321.575 39.418C275.802 52.703 213.042 59.156 155.101 62.991C190.198 159.275 254.458 236.761 312.946 320.121C333.664 300.466 364.056 288.138 396.406 284.111C375.606 266.002 359.772 256.145 337.573 213.673C368.843 250.758 390.152 262.14 415.196 275.679C418.459 262.585 424.134 251.041 433.917 243.005C442.584 235.885 453.943 232.351 467.447 232.661C420.573 172.898 365.777 115.607 339.617 43.226L339.155 0.245995V0.244995ZM141.25 11.92L123.252 12.164C123.252 12.164 123.502 30.504 123.812 49.134C123.968 58.45 124.137 67.837 124.301 75.063C124.361 77.699 124.418 79.643 124.475 81.605C90.097 165.338 55.321 242.598 0.554993 315.047C34.19 313.66 66.881 313.844 99.107 315.006C121.37 252.389 122.453 180.151 134.734 113C146.151 181.562 145.3 252.445 168.217 318.83C211.179 321.912 253.907 326.028 297.567 329.756C241.897 250.605 179.354 174.719 142.449 80.391C142.399 78.609 142.349 76.995 142.297 74.654C142.135 67.498 141.964 58.131 141.809 48.834C141.499 30.24 141.25 11.92 141.25 11.92V11.92Z"
+								fill="currentColor"
+							/>
+						</svg>
+						<p class="text-white text-lg">Camping</p>
+					</div>
 				</div>
 				<div class="hidden md:block">
 					<div class="ml-10 flex items-baseline space-x-4">
@@ -32,6 +35,7 @@
 			<div class="-mr-2 flex md:hidden">
 				<!-- Mobile menu button -->
 				<button
+					(click)="toggleMobileNav()"
 					type="button"
 					class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
 					aria-controls="mobile-menu"
@@ -44,6 +48,7 @@
 				Menu open: "hidden", Menu closed: "block"
 			  -->
 					<svg
+						*ngIf="!mobileNavOpen"
 						class="block h-6 w-6"
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -64,7 +69,8 @@
 				Menu open: "block", Menu closed: "hidden"
 			  -->
 					<svg
-						class="hidden h-6 w-6"
+						*ngIf="mobileNavOpen"
+						class="h-6 w-6"
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
@@ -84,7 +90,7 @@
 	</div>
 
 	<!-- Mobile menu, show/hide based on menu state. -->
-	<div class="md:hidden" id="mobile-menu">
+	<div class="md:hidden" id="mobile-menu" *ngIf="mobileNavOpen">
 		<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
 			<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 			<a

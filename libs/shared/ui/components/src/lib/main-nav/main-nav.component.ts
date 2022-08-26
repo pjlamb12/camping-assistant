@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./main-nav.component.scss'],
 })
 export class MainNavComponent implements OnInit {
+	public mobileNavOpen = false;
 	constructor() {}
 
 	ngOnInit(): void {}
+
+	toggleMobileNav() {
+		this.mobileNavOpen = !this.mobileNavOpen;
+	}
 }
