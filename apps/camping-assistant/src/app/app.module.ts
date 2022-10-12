@@ -10,6 +10,9 @@ import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const dbConfig: DBConfig = {
 	name: 'camping-assistant',
@@ -47,6 +50,18 @@ const routes: Routes[] = [];
 			registrationStrategy: 'registerWhenStable:30000',
 		}),
 		ConfirmDialogModule,
+		StoreModule.forRoot(
+			{},
+			{
+				metaReducers: !environment.production ? [] : [],
+				runtimeChecks: {
+					strictActionImmutability: true,
+					strictStateImmutability: true,
+				},
+			}
+		),
+		EffectsModule.forRoot([]),
+		!environment.production ? StoreDevtoolsModule.instrument() : [],
 	],
 	providers: [],
 	bootstrap: [AppComponent],
