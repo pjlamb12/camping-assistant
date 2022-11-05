@@ -19,16 +19,18 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 		if (this._swUpdate.isEnabled) {
-			this._swUpdate.versionUpdates.pipe(
-				filter(
-					(evt): evt is VersionReadyEvent =>
-						evt.type === 'VERSION_READY'
-				),
-				tap(() => {
-					this.showUpdateConfirmDialog();
-				}),
-				untilDestroyed(this)
-			);
+			this._swUpdate.versionUpdates
+				.pipe(
+					filter(
+						(evt): evt is VersionReadyEvent =>
+							evt.type === 'VERSION_READY'
+					),
+					tap(() => {
+						this.showUpdateConfirmDialog();
+					}),
+					untilDestroyed(this)
+				)
+				.subscribe();
 		}
 	}
 
